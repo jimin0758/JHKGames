@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JHK Games | 김윤희</title>
+  <style>
+    /* CSS Reset & Variables */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --card-hover-border: #818cf8;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* Category Section */
+    .category-section {
+      margin-bottom: 3rem;
+    }
+
+    .category-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+
+    /* Grid Layout */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Game Card Style */
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      border-color: var(--card-hover-border);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .card-link-btn {
+      align-self: flex-start;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .card:hover .card-link-btn {
+      color: #a5b4fc;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>🎮 JHK Games</h1>
+      <p>당장 우리의 놀이 하세요.</p>
+    </header>
+
+    <!-- dn -->
+    <section class="category-section">
+      <h2 class="category-title">우리의 게임들!</h2>
+      <div class="card-grid">
+        
+        <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="card">
+          <div class="card-icon">🚀</div>
+          <div class="card-title">게임1</div>
+          <div class="card-desc">게임1</div>
+          <span class="card-link-btn">바로가기 &rarr;</span>
+        </a>
+
+        <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="card">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">게임2</div>
+          <div class="card-desc">게임2</div>
+          <span class="card-link-btn">바로가기 &rarr;</span>
+        </a>
+
+        <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="card">
+          <div class="card-icon">🟢</div>
+          <div class="card-title">게임3</div>
+          <div class="card-desc">게임3</div>
+          <span class="card-link-btn">바로가기 &rarr;</span>
+        </a>
+
+        <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="card">
+          <div class="card-icon">👾</div>
+          <div class="card-title">게임4</div>
+          <div class="card-desc">게임4</div>
+          <span class="card-link-btn">바로가기 &rarr;</span>
+        </a>
+
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 제미나이 디자인</p>
+    </footer>
+  </div>
+
+</body>
+</html>
