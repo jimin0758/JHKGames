@@ -41,27 +41,27 @@ const JUNK=[["🥾","낡은 장화",1],["🥫","찌그러진 깡통",1],["🪨",
 // 광물: [이름,이미지index,등급,가격,가중치,황금여부]
 const ORES=[["구리 원석",5,1,15,12],["철 원석",6,1,25,10],["은 원석",7,2,90,5],["청금석",8,2,120,4],["자수정",9,2,150,3],["붉은 루비",0,3,500,3],["푸른 사파이어",1,3,700,2.5],["에메랄드",3,3,900,1.5],["전설의 다이아",2,4,4000,1],["황금 광물",4,5,50000,0.3,1]];
 const JUNKW=58;
-const PK=[["나무 곡괭이",0,1,0],["돌 곡괭이",400,2,.1],["철 곡괭이",2000,3,.25],["다이아 곡괭이",10000,5,.5],["미스릴 곡괭이",50000,8,1],["신화 곡괭이",250000,12,2]];
+const PK=[["나무 곡괭이",0,1,0],["돌 곡괭이",720,2,.1],["철 곡괭이",3600,3,.25],["다이아 곡괭이",18000,5,.5],["미스릴 곡괭이",90000,8,1],["신화 곡괭이",450000,12,2],["오리하르콘 곡괭이",3600000,20,3.5],["운석 곡괭이",14400000,35,5.5],["우주 곡괭이",54000000,60,9]];
 let S={g:0,tier:0,enh:0,bag:{},seen:{},cnt:0,capLv:0,reg:0,unl:0};
 try{const x=localStorage.getItem("mine1");if(x)S=Object.assign(S,JSON.parse(x))}catch(e){}
 const save=()=>{try{localStorage.setItem("mine1",JSON.stringify(S))}catch(e){}};
-const REG=[{n:"초원 동굴",e:"🪨",hp:6,junk:58,tw:[1,1,1,1,1,0],cost:0,d:"기본 광산 · 황금 신화는 나오지 않아요"},{n:"깊은 광산",e:"⛰️",hp:10,junk:50,tw:[1,1,1.5,1.5,1.5,1],cost:3000,d:"영웅 이상 확률 상승 · 황금 신화 등장"},{n:"용암 지대",e:"🌋",hp:18,junk:42,tw:[1,.5,1,2,2.5,2.5],cost:20000,d:"일반 광물이 줄고 영웅·전설이 늘어요"},{n:"심해 유적",e:"🌊",hp:30,junk:35,tw:[1,.2,.8,2.5,4,6],cost:100000,d:"전설과 황금 신화 확률 대폭 상승"}];
+const REG=[{n:"초원 동굴",e:"🪨",hp:6,junk:58,tw:[1,1,1,1,1,0],cost:0,d:"기본 광산 · 황금 신화는 나오지 않아요"},{n:"깊은 광산",e:"⛰️",hp:10,junk:50,tw:[1,1,1.5,1.5,1.5,1],cost:5400,d:"영웅 이상 확률 상승 · 황금 신화 등장"},{n:"용암 지대",e:"🌋",hp:18,junk:42,tw:[1,.5,1,2,2.5,2.5],cost:36000,d:"일반 광물이 줄고 영웅·전설이 늘어요"},{n:"심해 유적",e:"🌊",hp:30,junk:35,tw:[1,.2,.8,2.5,4,6],cost:180000,d:"전설과 황금 신화 확률 대폭 상승"},{n:"얼음 협곡",e:"🧊",hp:45,junk:32,tw:[1,.1,.6,2.5,5,8],cost:900000,d:"일반 광물이 거의 안 나와요 · 전설·황금 신화 크게 상승"},{n:"운석 지대",e:"☄️",hp:70,junk:28,tw:[1,0,.3,2,6,12],cost:3600000,d:"일반 광물 없음 · 영웅 이상 위주"},{n:"우주 광산",e:"🌌",hp:110,junk:25,tw:[1,0,.1,1.5,8,20],cost:14400000,d:"최종 지역 · 황금 신화 확률 최대"}];
 let tab="mine",hp=REG[S.reg||0].hp,last=null,full=0;
 const bagN=()=>Object.values(S.bag).reduce((a,b)=>a+b,0);
 let Z=null,zt=null,zmsg="";
 function zbar(){const a=document.getElementById("zh"),b=document.getElementById("zt");if(a)a.style.width=(Z.hp/Z.max*100)+"%";if(b)b.style.width=(Z.t/Z.tm*100)+"%"}
 function zEnd(m){clearInterval(zt);Z=null;zmsg=m;save();render()}
-function spawnZ(){const m=25+S.reg*20;Z={hp:m,max:m,t:8,tm:8};clearInterval(zt);zt=setInterval(()=>{if(!Z)return;Z.t-=.1;Z.hp=Math.min(Z.max,Z.hp+.08);if(Z.t<=0){const l=Math.floor(S.g*.2);S.g-=l;zEnd("🧟 좀비에게 당했어요... -"+fmt(l)+"원")}else zbar()},100);render()}
+function spawnZ(){const m=50+S.reg*30;Z={hp:m,max:m,t:8,tm:8};clearInterval(zt);zt=setInterval(()=>{if(!Z)return;Z.t-=.1;Z.hp=Math.min(Z.max,Z.hp+.08);if(Z.t<=0){const l=Math.floor(S.g*.2);S.g-=l;zEnd("🧟 좀비에게 당했어요... -"+fmt(l)+"원")}else zbar()},100);render()}
 function hitZ(){if(!Z)return;Z.hp-=pow();if(Z.hp<=0){const rw=Math.floor((800+1000*S.reg*S.reg)*(1+Math.random()));S.g+=rw;zEnd("🗡 좀비 처치! 보상 +"+fmt(rw)+"원")}else zbar()}
 const cap=()=>20+10*S.capLv;
-const capCost=()=>Math.floor(150*Math.pow(1.5,S.capLv));
+const capCost=()=>Math.floor(270*Math.pow(1.5,S.capLv));
 function buyCap(){const c=capCost();if(S.g<c)return;S.g-=c;S.capLv++;full=0;save();render()}
 function setReg(i){if(i>S.unl)return;S.reg=i;hp=REG[i].hp;full=0;save();render()}
 function buyReg(i){const c=REG[i].cost;if(i!=S.unl+1||S.g<c)return;S.g-=c;S.unl=i;S.reg=i;hp=REG[i].hp;save();render()}
 const fmt=n=>Math.floor(n).toLocaleString("ko-KR");
 const pow=()=>PK[S.tier][2]*(1+.15*S.enh);
 const luck=()=>1+PK[S.tier][3]+.12*S.enh;
-function roll(){const L=luck();const R=REG[S.reg];const w=ORES.map(o=>o[4]*L*R.tw[o[2]]);const tot=R.junk+w.reduce((a,b)=>a+b,0);let r=Math.random()*tot;
+function roll(){const L=luck();const R=REG[S.reg];const w=ORES.map(o=>o[4]*L*R.tw[o[2]]*.6);const tot=R.junk+w.reduce((a,b)=>a+b,0);let r=Math.random()*tot;
  if(r<R.junk){const j=JUNK[Math.floor(Math.random()*JUNK.length)];return{junk:1,n:j[1],e:j[0],v:j[2],t:0,k:"j"+j[1]}}
  r-=R.junk;for(let i=0;i<ORES.length;i++){if(r<w[i]){const o=ORES[i];return{n:o[0],img:o[1],t:o[2],v:o[3],gold:o[5],k:"o"+i}}r-=w[i]}
  const o=ORES[0];return{n:o[0],img:o[1],t:o[2],v:o[3],k:"o0"}}
@@ -74,7 +74,7 @@ const val=it=>it.v*(1+.1*S.enh);
 function sell(k,all){const n=S.bag[k]||0;if(!n)return;const it=info(k);S.g+=val(it)*n;delete S.bag[k];save();render()}
 function sellAll(){Object.keys(S.bag).forEach(k=>{S.g+=val(info(k))*S.bag[k]});S.bag={};save();render()}
 function buy(i){const p=PK[i][1];if(S.g<p||i<=S.tier)return;S.g-=p;S.tier=i;S.enh=0;save();render()}
-const ecost=()=>Math.floor(150*Math.pow(1.7,S.enh)*(S.tier+1));
+const ecost=()=>Math.floor(270*Math.pow(1.7,S.enh)*(S.tier+1));
 const erate=()=>Math.max(.2,.95-.08*S.enh);
 function enhance(){if(S.enh>=10)return;const c=ecost();if(S.g<c)return;S.g-=c;const ok=Math.random()<erate();if(ok)S.enh++;save();render(ok?"✨ 강화 성공!":"💥 강화 실패 (등급 유지)")}
 function render(msg){
