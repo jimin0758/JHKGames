@@ -1,0 +1,22 @@
+name: Run Python
+
+on:
+  push:                  # 코드를 push할 때마다 실행
+  workflow_dispatch:     # 깃허브 화면에서 수동 실행 버튼도 생김
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"          # 설치 속도 향상
+
+      - name: 패키지 설치
+        run: pip install -r requirements.txt
+
+      - name: 실행
+        run: python main.py
